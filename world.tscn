@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=3 uid="uid://ti70iv0kibi2"]
+
+[ext_resource type="Script" path="res://world.gd" id="1_6lxn3"]
+[ext_resource type="PackedScene" uid="uid://bswygeyyx87p" path="res://player.tscn" id="2_2ydfp"]
+
+[sub_resource type="Environment" id="Environment_f6ed2"]
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_cfn13"]
+
+[node name="World" type="Node3D"]
+script = ExtResource("1_6lxn3")
+player_scene = ExtResource("2_2ydfp")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.892948, 0.450161, 0, -0.388667, -0.770967, 0.504528, 0.227119, 0.450517, 0.863396, 0, 3.4902, 4.097)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_f6ed2")
+camera_attributes = SubResource("CameraAttributesPractical_cfn13")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(6.11938, 0, 0, 0, 0.321924, 0, 0, 0, 1, 0.0162215, 0, 0.206238)
+use_collision = true
+size = Vector3(2.97546, 1, 11.9261)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HOST" type="Button" parent="CanvasLayer"]
+offset_right = 283.0
+offset_bottom = 93.0
+text = "HOST SERVER"
+
+[node name="JOIN" type="Button" parent="CanvasLayer"]
+offset_left = 291.0
+offset_right = 574.0
+offset_bottom = 93.0
+text = "JOIN SERVER
+"
+metadata/_edit_group_ = true
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://player.tscn")
+spawn_path = NodePath("..")
+
+[connection signal="pressed" from="CanvasLayer/HOST" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="CanvasLayer/JOIN" to="." method="_on_join_pressed"]
